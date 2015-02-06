@@ -3,7 +3,7 @@ $(document).ready ->
   $("#new_sentence").on("ajax:success", (e, data, status, xhr) ->
     $("#story p").append " #{data.text}"
     $("#new_sentence")[0].reset()
-    $("#new_sentence").attr('action', "/sentences/#{data.id}/sentences")
+    $("#new_sentence").attr('action', "/story/#{data.id}/sentences")
     history.pushState({id: 'sentence_state'}, '', data.id);
     $("#errors").html ""
     $("#nextLines").html ""
