@@ -9,4 +9,13 @@ development:
   host: localhost
   pool: 5
   port: 5432
-  
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: story_builder_test
+  username: julescopeland
+  host: localhost
+  pool: 5
+  port: 5432
+
