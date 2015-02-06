@@ -1,0 +1,7 @@
+<% title 'Write a new opening line' %>
+<h1>Write a new opening line</h1>
+
+<%= bootstrap_form_for @opening_line, url: create_opening_line_path do |f| %>
+  <%= f.text_area :text, hide_label: :true, placeholder: "Please use the best grammar and spelling that you can muster." %>
+  <%= f.submit "Save", class: 'btn btn-success' %>
+<% end %>

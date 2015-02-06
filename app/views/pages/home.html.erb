@@ -1,2 +1,6 @@
 <% title("Home Page") %>
-<h1><i class="fa fa-home"></i> Home Page <small>views/pages/home.html.erb</small></h1>
+<h1><i class="fa fa-home"></i> Opening Lines</h1>
+
+<%= render @opening_lines %>
+
+<%= link_to "...or create your own", new_opening_line_path, class: 'btn btn-success' %>

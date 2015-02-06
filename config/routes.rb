@@ -1,4 +1,12 @@
 StoryBuilder::Application.routes.draw do
+  resources :stories
+
+  resources :sentences, except: [:edit, :update, :index] do
+    resources :stories, only: [:new]
+  end
+  get 'new_opening_line', to: 'sentences#new_opening_line'
+  post 'create_opening_line', to: 'sentences#create_opening_line'
+
   root "pages#home"
   get "home", to: "pages#home", as: "home"
   get "inside", to: "pages#inside", as: "inside"
