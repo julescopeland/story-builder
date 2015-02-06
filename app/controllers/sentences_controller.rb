@@ -7,7 +7,7 @@ class SentencesController < ApplicationController
   def create_opening_line
     @opening_line = Sentence.create(sentence_params)
     if @opening_line.persisted?
-      redirect_to root_path
+      redirect_to @opening_line
     else
       render :new_opening_line
     end
