@@ -5,12 +5,21 @@ class Sentence < ActiveRecord::Base
 
   scope :opening_lines, ->{ where(parent_id: nil) }
 
-  has_many :next_lines, class_name: Sentence, foreign_key: 'parent_id'
+  has_many :next_lines, class_name: Sentence, foreign_key: 'parent_id', dependent: :destroy
   belongs_to :parent, class_name: Sentence
 
   def story
     return text unless parent
     [parent.story, text].join(" ")
+  end
+  def html_story
+    return to_link unless parent
+    [parent.html_story, to_link].join(" ")
+  end
+
+  include ActionView::Helpers::UrlHelper
+  def to_link
+    link_to text, Rails.application.routes.url_helpers.sentence_path(self), title: 'Click me to start writing your own version from here...'
   end
 
   private

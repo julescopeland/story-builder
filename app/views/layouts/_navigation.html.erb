@@ -11,7 +11,7 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <%#= render 'layouts/navigation_links' %>
+        <%= render 'layouts/navigation_links' if controller_name == 'base' %>
       </ul>
     </div>
   </div>

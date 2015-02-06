@@ -1,5 +1,5 @@
 <div id="story" class="well">
-  <p><%= @sentence.story %></p>
+  <p class='lead'><%= @sentence.html_story.html_safe %></p>
 </div>
 
 <h5>Write the next line:</h5>
@@ -10,8 +10,9 @@
 <% end %>
 
 <br>
-<ul>
+<h5>Or choose one of these:</h5>
+<div id='nextLines' class="list-group">
 <% @sentence.next_lines.each do |next_line| %>
-  <li><%= link_to next_line.text, next_line %></li>
+  <%= link_to next_line.text, next_line, class: "list-group-item" %>
 <% end -%>
-</ul>
+</div>

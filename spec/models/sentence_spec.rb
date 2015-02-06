@@ -35,12 +35,36 @@ RSpec.describe Sentence do
     end
   end
 
+  describe "destroying" do
+    it "destroys its children recursively" do
+      sentence1 = Sentence.create(text: 'This is the first sentence.', parent_id: nil)
+      sentence2 = Sentence.create(text: 'This is the second sentence.', parent_id: sentence1.id)
+      sentence3 = Sentence.create(text: 'This is the third sentence.', parent_id: sentence2.id)
+      expect { sentence1.destroy }.to change{Sentence.count}.by(-3)
+    end
+  end
+
   describe "story" do
     it "returns the parents of the sentence in correct order" do
       sentence1 = Sentence.create(text: 'This is the first sentence.', parent_id: nil)
       sentence2 = Sentence.create(text: 'This is the second sentence.', parent_id: sentence1.id)
       sentence3 = Sentence.create(text: 'This is the third sentence.', parent_id: sentence2.id)
       expect(sentence3.story).to eq "This is the first sentence. This is the second sentence. This is the third sentence."
+    end
+  end
+
+  describe "to_link" do
+    it "returns a link with the href equal to '/sentences/:id'" do
+      sentence = Sentence.create(text: 'This is a sentence.', parent_id: nil)
+      expect(sentence.to_link).to include "href=\"/sentences/#{sentence.id}\""
+    end
+    it "returns a link with the text equal to the sentence text" do
+      sentence = Sentence.create(text: 'This is a sentence.', parent_id: nil)
+      expect(sentence.to_link).to include 'This is a sentence.'
+    end
+    it "returns a link with an title attribute saying: Click me to start writing your own version from here..." do
+      sentence = Sentence.create(text: 'This is a sentence.', parent_id: nil)
+      expect(sentence.to_link).to include "title=\"Click me to start writing your own version from here...\""
     end
   end
 end

@@ -19,7 +19,7 @@ class SentencesController < ApplicationController
   end
 
   def create
-    text = sentence_params[:text].titleize
+    text = sentence_params[:text].sub(/./){$&.upcase}
     @sentence = Sentence.create(parent_id: params[:sentence_id], text: text)
     if @sentence.persisted?
       render json: @sentence, status: 200

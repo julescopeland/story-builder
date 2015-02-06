@@ -1,5 +1,5 @@
 StoryBuilder::Application.routes.draw do
-  resources :sentences, except: [:edit, :update, :index, :create] do
+  resources :sentences, except: [:edit, :update, :index, :create], path: 'story' do
     resources :sentences, only: [:create]
   end
   get 'new_opening_line', to: 'sentences#new_opening_line'
