@@ -1,1 +1,17 @@
-<%= @sentence.text %>
+<div id="story" class="well">
+  <p><%= @sentence.story %></p>
+</div>
+
+<h5>Write the next line:</h5>
+<div id="errors" class='text-danger'></div>
+<%= bootstrap_form_for @new_sentence, url: sentence_sentences_path(@sentence), remote: true do |f| %>
+  <%= f.text_area :text, hide_label: :true, placeholder: "Please use the best grammar and spelling that you can muster." %>
+  <%= f.submit "Save", class: 'btn btn-success' %>
+<% end %>
+
+<br>
+<ul>
+<% @sentence.next_lines.each do |next_line| %>
+  <li><%= link_to next_line.text, next_line %></li>
+<% end -%>
+</ul>

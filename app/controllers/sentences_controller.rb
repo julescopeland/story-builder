@@ -15,6 +15,17 @@ class SentencesController < ApplicationController
 
   def show
     @sentence = Sentence.find(params[:id])
+    @new_sentence = Sentence.new
+  end
+
+  def create
+    text = sentence_params[:text].titleize
+    @sentence = Sentence.create(parent_id: params[:sentence_id], text: text)
+    if @sentence.persisted?
+      render json: @sentence, status: 200
+    else
+      render json: @sentence.errors.full_messages.join("</li><li>").html_safe, status: :unprocessable_entity
+    end
   end
 
   def destroy
