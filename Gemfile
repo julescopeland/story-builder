@@ -23,6 +23,8 @@ gem 'font-awesome-sass', '4.2.2'
 gem 'bootstrap-sass', '3.3.3'
 gem 'bootstrap_form'
 
+gem 'newrelic_rpm'
+
 group :development, :test do
   gem 'byebug', '3.5.1'
   gem 'web-console', '2.0.0'
